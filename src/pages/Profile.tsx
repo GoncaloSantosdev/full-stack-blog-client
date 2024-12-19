@@ -1,4 +1,6 @@
 import { posts } from "../data/postsData";
+// Components
+import { PostCard } from "../components";
 
 const Profile = () => {
   return (
@@ -42,42 +44,7 @@ const Profile = () => {
       {/* Posts Grid */}
       <div className="grid grid-cols-1 gap-6">
         {posts.map((post) => (
-          <article
-            key={post.id}
-            className="bg-dark-700/50 rounded-lg border border-dark-600 overflow-hidden group"
-          >
-            <div className="p-6 space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="px-3 py-1 bg-primary-500/10 text-primary-400 rounded-full text-sm">
-                  {post.category}
-                </span>
-                <div className="flex items-center space-x-2">
-                  <button className="text-dark-300 hover:text-primary-400">
-                    Edit
-                  </button>
-                  <button className="text-dark-300 hover:text-red-400">
-                    Delete
-                  </button>
-                </div>
-              </div>
-              <h2 className="text-2xl font-semibold text-dark-100 group-hover:text-primary-400 transition-colors">
-                {post.title}
-              </h2>
-              <p className="text-dark-300">{post.excerpt}</p>
-              <div className="flex items-center justify-between text-sm">
-                <div className="flex items-center space-x-4">
-                  <span className="text-dark-400">{post.date}</span>
-                  <span className="text-dark-400">{post.readTime}</span>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <span className="text-dark-400">{post.likes} likes</span>
-                  <span className="text-dark-400">
-                    {post.comments} comments
-                  </span>
-                </div>
-              </div>
-            </div>
-          </article>
+          <PostCard key={post.id} post={post} showActions />
         ))}
       </div>
     </div>
