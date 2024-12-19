@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Quill Editor Styles */
+.prose-editor .ql-toolbar {
+  background-color: theme("colors.dark.700");
+  border-color: theme("colors.dark.600") !important;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.prose-editor .ql-container {
+  border-color: theme("colors.dark.600") !important;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  min-height: 200px;
+}
+
+.prose-editor .ql-editor {
+  min-height: 200px;
+}
+
+.prose-editor .ql-editor.ql-blank::before {
+  color: theme("colors.dark.400");
+}
+
+.prose-editor .ql-stroke {
+  stroke: theme("colors.dark.200") !important;
+}
+
+.prose-editor .ql-fill {
+  fill: theme("colors.dark.200") !important;
+}
+
+.prose-editor .ql-picker {
+  color: theme("colors.dark.200") !important;
+}
+
+.prose-editor .ql-picker-options {
+  background-color: theme("colors.dark.700") !important;
+  border-color: theme("colors.dark.600") !important;
+}
+
+.prose-editor .ql-toolbar button:hover .ql-stroke,
+.prose-editor .ql-toolbar button.ql-active .ql-stroke {
+  stroke: theme("colors.primary.400") !important;
+}
+
+.prose-editor .ql-toolbar button:hover .ql-fill,
+.prose-editor .ql-toolbar button.ql-active .ql-fill {
+  fill: theme("colors.primary.400") !important;
+}
+
+.prose-editor .ql-toolbar button:hover,
+.prose-editor .ql-toolbar .ql-picker-label:hover {
+  color: theme("colors.primary.400") !important;
+}

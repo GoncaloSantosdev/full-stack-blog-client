@@ -1,8 +1,26 @@
+import { useState } from "react";
 import { posts } from "../data/postsData";
 // Components
-import { PostCard } from "../components";
+import { PostCard, Select } from "../components";
+
+const CATEGORIES = [
+  { value: "", label: "All Categories" },
+  { value: "react", label: "React" },
+  { value: "typescript", label: "TypeScript" },
+  { value: "nodejs", label: "Node.js" },
+  { value: "nextjs", label: "Next.js" },
+];
+
+const SORT_OPTIONS = [
+  { value: "latest", label: "Latest" },
+  { value: "oldest", label: "Oldest" },
+  { value: "popular", label: "Most Popular" },
+];
 
 const Posts = () => {
+  const [category, setCategory] = useState("");
+  const [sortBy, setSortBy] = useState("latest");
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col space-y-4">
@@ -41,21 +59,21 @@ const Posts = () => {
 
         {/* Filters */}
         <div className="flex flex-wrap items-center gap-4">
-          {/* Categories */}
-          <select className="px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 text-dark-200 focus:outline-none focus:ring-2 focus:ring-primary-500">
-            <option value="">All Categories</option>
-            <option value="react">React</option>
-            <option value="typescript">TypeScript</option>
-            <option value="nodejs">Node.js</option>
-            <option value="nextjs">Next.js</option>
-          </select>
+          <Select
+            options={CATEGORIES}
+            value={category}
+            onChange={setCategory}
+            placeholder="All Categories"
+            className="w-48"
+          />
 
-          {/* Sort */}
-          <select className="px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 text-dark-200 focus:outline-none focus:ring-2 focus:ring-primary-500">
-            <option value="latest">Latest</option>
-            <option value="oldest">Oldest</option>
-            <option value="popular">Most Popular</option>
-          </select>
+          <Select
+            options={SORT_OPTIONS}
+            value={sortBy}
+            onChange={setSortBy}
+            placeholder="Sort by"
+            className="w-48"
+          />
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2">
