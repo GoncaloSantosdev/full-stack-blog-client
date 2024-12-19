@@ -1,3 +1,5 @@
+import { posts } from "../data/postsData";
+
 const Posts = () => {
   return (
     <div className="space-y-8">
@@ -69,32 +71,40 @@ const Posts = () => {
 
       {/* Posts Grid */}
       <div className="grid grid-cols-1 gap-6">
-        {[1, 2, 3].map((i) => (
+        {posts.map((post) => (
           <article
-            key={i}
-            className="bg-dark-700/50 p-6 rounded-lg border border-dark-600 hover:border-primary-500 transition-all duration-300 group"
+            key={post.id}
+            className="bg-dark-700/50 rounded-lg border border-dark-600 hover:border-primary-500 transition-all duration-300 group overflow-hidden"
           >
-            <div className="flex flex-col space-y-4">
+            <div className="aspect-[2/1] overflow-hidden">
+              <img
+                src={post.image}
+                alt={post.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="p-6 space-y-4">
               <div className="flex items-center space-x-2">
                 <span className="px-3 py-1 bg-primary-500/10 text-primary-400 rounded-full text-sm">
-                  React
+                  {post.category}
                 </span>
-                <span className="text-dark-400">5 min read</span>
+                <span className="text-dark-400">{post.readTime}</span>
               </div>
               <h2 className="text-2xl font-semibold text-dark-100 group-hover:text-primary-400 transition-colors">
-                Getting Started with React
+                {post.title}
               </h2>
-              <p className="text-dark-300">
-                Learn the basics of React and how to build your first
-                application...
-              </p>
+              <p className="text-dark-300">{post.excerpt}</p>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center space-x-2">
-                    <div className="w-8 h-8 rounded-full bg-dark-600" />
-                    <span className="text-dark-200">John Doe</span>
+                    <img
+                      src={post.author.avatar}
+                      alt={post.author.name}
+                      className="w-8 h-8 rounded-full object-cover"
+                    />
+                    <span className="text-dark-200">{post.author.name}</span>
                   </div>
-                  <span className="text-dark-400">March 10, 2024</span>
+                  <span className="text-dark-400">{post.date}</span>
                 </div>
                 <span className="text-primary-400 group-hover:text-primary-300">
                   Read more →

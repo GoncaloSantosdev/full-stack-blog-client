@@ -1,6 +1,27 @@
 import { PageHeader } from "../components";
 
 const About = () => {
+  const team = [
+    {
+      name: "John Doe",
+      role: "Founder & Developer",
+      image:
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=faces",
+    },
+    {
+      name: "Jane Smith",
+      role: "Technical Writer",
+      image:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=faces",
+    },
+    {
+      name: "Mike Johnson",
+      role: "Community Manager",
+      image:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=faces",
+    },
+  ];
+
   return (
     <div className="space-y-12">
       <PageHeader
@@ -39,29 +60,15 @@ const About = () => {
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold text-dark-100">Our Team</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {[
-            {
-              name: "John Doe",
-              role: "Founder & Developer",
-              image: "bg-dark-600",
-            },
-            {
-              name: "Jane Smith",
-              role: "Technical Writer",
-              image: "bg-dark-600",
-            },
-            {
-              name: "Mike Johnson",
-              role: "Community Manager",
-              image: "bg-dark-600",
-            },
-          ].map((member) => (
+          {team.map((member) => (
             <div
               key={member.name}
               className="bg-dark-700/50 p-6 rounded-lg border border-dark-600 text-center"
             >
-              <div
-                className={`w-24 h-24 ${member.image} rounded-full mx-auto mb-4`}
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
               />
               <h3 className="text-lg font-medium text-dark-100">
                 {member.name}

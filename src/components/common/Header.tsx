@@ -81,8 +81,13 @@ const Header = ({ className }: HeaderProps) => {
       </div>
 
       {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden py-4">
+      <div
+        className={cn(
+          "md:hidden overflow-hidden transition-all duration-300 ease-in-out",
+          isMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+        )}
+      >
+        <div className="py-4">
           <div className="flex flex-col space-y-4">
             {navLinks.map((item) => (
               <Link
@@ -104,7 +109,7 @@ const Header = ({ className }: HeaderProps) => {
             </Button>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 };
