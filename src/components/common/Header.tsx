@@ -1,22 +1,18 @@
 import { useState } from "react";
 // Router
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 // Components
 import { Button } from "../";
 // Utils
 import { cn } from "../../utils/cn";
 // Types
 import { HeaderProps } from "../../types";
+// Data
+import { navLinks } from "../../data/navLinks";
 
 const Header = ({ className }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const navItems = [
-    { label: "Home", path: "/" },
-    { label: "Posts", path: "/posts" },
-    { label: "About", path: "/about" },
-    { label: "Contact", path: "/contact" },
-  ];
+  const location = useLocation();
 
   return (
     <header
@@ -33,11 +29,16 @@ const Header = ({ className }: HeaderProps) => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          {navItems.map((item) => (
+          {navLinks.map((item) => (
             <Link
-              key={item.path}
-              to={item.path}
-              className="text-dark-200 hover:text-primary-400 transition-colors"
+              key={item.href}
+              to={item.href}
+              className={cn(
+                "transition-colors",
+                location.pathname === item.href
+                  ? "text-primary-400"
+                  : "text-dark-200 hover:text-primary-400"
+              )}
             >
               {item.label}
             </Link>
@@ -83,11 +84,16 @@ const Header = ({ className }: HeaderProps) => {
       {isMenuOpen && (
         <div className="md:hidden py-4">
           <div className="flex flex-col space-y-4">
-            {navItems.map((item) => (
+            {navLinks.map((item) => (
               <Link
-                key={item.path}
-                to={item.path}
-                className="text-dark-200 hover:text-primary-400 transition-colors"
+                key={item.href}
+                to={item.href}
+                className={cn(
+                  "transition-colors",
+                  location.pathname === item.href
+                    ? "text-primary-400"
+                    : "text-dark-200 hover:text-primary-400"
+                )}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
