@@ -12,3 +12,9 @@ export interface ButtonProps {
 export interface HeaderProps {
   className?: string;
 }
+
+export interface PageHeaderProps {
+  title: string;
+  description?: string;
+  className?: string;
+}
