@@ -1,8 +1,10 @@
+import { Button } from "../components";
+
 const Contact = () => {
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <>
       <h1 className="text-4xl font-bold text-dark-100 mb-8">Contact Us</h1>
-      <form className="space-y-6">
+      <form className="space-y-6 max-w-xl">
         <div>
           <label
             htmlFor="email"
@@ -35,15 +37,11 @@ const Contact = () => {
             placeholder="Your message here..."
           ></textarea>
         </div>
-        <button
-          type="submit"
-          className="px-6 py-2 bg-primary-600 text-white rounded-lg 
-          hover:bg-primary-700 transition-colors"
-        >
+        <Button type="submit" variant="primary" size="md">
           Send Message
-        </button>
+        </Button>
       </form>
-    </div>
+    </>
   );
 };
 
