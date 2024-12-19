@@ -18,3 +18,25 @@ export interface PageHeaderProps {
   description?: string;
   className?: string;
 }
+
+export interface PostProps {
+  id: number;
+  title: string;
+  excerpt: string;
+  content: string;
+  tags: string[];
+  readTime: string;
+  author: {
+    name: string;
+    avatar: string;
+  };
+  date: string;
+  image: string;
+  likes: number;
+  comments: number;
+}
+
+export interface PostCardProps {
+  post: PostProps;
+  showActions?: boolean;
+}

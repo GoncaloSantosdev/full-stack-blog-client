@@ -1,5 +1,9 @@
+// React Router
 import { useParams } from "react-router-dom";
+// Data
 import { posts } from "../data/postsData";
+// Components
+import { Button } from "../components";
 
 const PostDetails = () => {
   const { id } = useParams();
@@ -10,28 +14,51 @@ const PostDetails = () => {
   return (
     <article className="space-y-8">
       {/* Post Header */}
-      <div className="space-y-4">
-        <div className="flex items-center space-x-2">
-          <span className="px-3 py-1 bg-primary-500/10 text-primary-400 rounded-full text-sm">
-            {post.category}
-          </span>
-          <span className="text-dark-400">{post.readTime}</span>
+      <div className="space-y-6">
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2">
+          {post.tags.map((tag) => (
+            <span
+              key={tag}
+              className="px-3 py-1 bg-primary-500/10 text-primary-400 rounded-full text-sm"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
-        <h1 className="text-4xl font-bold text-dark-100">{post.title}</h1>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
+
+        {/* Title & Excerpt */}
+        <div className="space-y-4">
+          <h1 className="text-4xl font-bold text-dark-100">{post.title}</h1>
+          <p className="text-xl text-dark-300">{post.excerpt}</p>
+        </div>
+
+        {/* Author Info & Meta */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-dark-700 pb-6 space-y-4 sm:space-y-0">
+          {/* Author and Date */}
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex items-center space-x-3">
               <img
                 src={post.author.avatar}
                 alt={post.author.name}
                 className="w-10 h-10 rounded-full object-cover"
               />
-              <span className="text-dark-200">{post.author.name}</span>
+              <div className="flex flex-col">
+                <span className="text-dark-100 font-medium">
+                  {post.author.name}
+                </span>
+                <span className="text-dark-400 text-sm">{post.date}</span>
+              </div>
             </div>
-            <span className="text-dark-400">{post.date}</span>
+            <div className="flex items-center space-x-2 text-sm">
+              <span className="text-dark-400 hidden sm:inline">·</span>
+              <span className="text-dark-400">{post.readTime} read</span>
+            </div>
           </div>
+
+          {/* Social Actions */}
           <div className="flex items-center space-x-4">
-            <button className="flex items-center space-x-1 text-dark-300 hover:text-primary-400">
+            <button className="flex items-center space-x-2 text-dark-300 hover:text-primary-400">
               <svg
                 className="w-5 h-5"
                 fill="none"
@@ -45,9 +72,9 @@ const PostDetails = () => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 />
               </svg>
-              <span>{post.likes}</span>
+              <span className="text-sm">{post.likes}</span>
             </button>
-            <button className="flex items-center space-x-1 text-dark-300 hover:text-primary-400">
+            <button className="flex items-center space-x-2 text-dark-300 hover:text-primary-400">
               <svg
                 className="w-5 h-5"
                 fill="none"
@@ -61,7 +88,7 @@ const PostDetails = () => {
                   d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
                 />
               </svg>
-              <span>{post.comments}</span>
+              <span className="text-sm">{post.comments}</span>
             </button>
           </div>
         </div>
@@ -81,20 +108,8 @@ const PostDetails = () => {
         <div className="whitespace-pre-wrap text-dark-200">{post.content}</div>
       </div>
 
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2">
-        {post.tags.map((tag) => (
-          <span
-            key={tag}
-            className="px-3 py-1 bg-dark-700 text-dark-200 rounded-full text-sm"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-
       {/* Comments Section */}
-      <section className="space-y-6">
+      <section className="space-y-6 border-t border-dark-700 pt-8">
         <h2 className="text-2xl font-semibold text-dark-100">
           Comments ({post.comments})
         </h2>
@@ -109,13 +124,9 @@ const PostDetails = () => {
             placeholder="Write a comment..."
           />
           <div className="flex justify-end">
-            <button
-              type="submit"
-              className="px-6 py-2 bg-primary-600 text-white rounded-lg 
-              hover:bg-primary-700 transition-colors"
-            >
+            <Button variant="primary" type="submit">
               Post Comment
-            </button>
+            </Button>
           </div>
         </form>
 

@@ -1,14 +1,19 @@
 import { useState } from "react";
+// Data
 import { posts } from "../data/postsData";
 // Components
 import { PostCard, Select } from "../components";
 
-const CATEGORIES = [
-  { value: "", label: "All Categories" },
+const TAGS_OPTIONS = [
+  { value: "", label: "All Tags" },
   { value: "react", label: "React" },
   { value: "typescript", label: "TypeScript" },
+  { value: "javascript", label: "JavaScript" },
   { value: "nodejs", label: "Node.js" },
-  { value: "nextjs", label: "Next.js" },
+  { value: "frontend", label: "Frontend" },
+  { value: "backend", label: "Backend" },
+  { value: "api", label: "API" },
+  { value: "web-development", label: "Web Development" },
 ];
 
 const SORT_OPTIONS = [
@@ -18,7 +23,7 @@ const SORT_OPTIONS = [
 ];
 
 const Posts = () => {
-  const [category, setCategory] = useState("");
+  const [selectedTag, setSelectedTag] = useState("");
   const [sortBy, setSortBy] = useState("latest");
 
   return (
@@ -60,10 +65,10 @@ const Posts = () => {
         {/* Filters */}
         <div className="flex flex-wrap items-center gap-4">
           <Select
-            options={CATEGORIES}
-            value={category}
-            onChange={setCategory}
-            placeholder="All Categories"
+            options={TAGS_OPTIONS}
+            value={selectedTag}
+            onChange={setSelectedTag}
+            placeholder="Filter by tag"
             className="w-48"
           />
 
@@ -74,18 +79,6 @@ const Posts = () => {
             placeholder="Sort by"
             className="w-48"
           />
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2">
-            {["Frontend", "Backend", "DevOps", "Database"].map((tag) => (
-              <button
-                key={tag}
-                className="px-3 py-1 text-sm bg-dark-700 text-dark-200 rounded-full hover:bg-dark-600 transition-colors"
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
         </div>
       </div>
 

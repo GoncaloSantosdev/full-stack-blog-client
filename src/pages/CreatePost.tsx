@@ -1,24 +1,41 @@
 import { useState } from "react";
+// React Quill
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { Button, PageHeader, ImageUpload } from "../components";
+// Components
+import { Button, PageHeader, ImageUpload, Select } from "../components";
 
-const CATEGORIES = [
+const TAGS_OPTIONS = [
   { value: "react", label: "React" },
   { value: "typescript", label: "TypeScript" },
+  { value: "javascript", label: "JavaScript" },
   { value: "nodejs", label: "Node.js" },
   { value: "nextjs", label: "Next.js" },
+  { value: "frontend", label: "Frontend" },
+  { value: "backend", label: "Backend" },
+  { value: "api", label: "API" },
+  { value: "database", label: "Database" },
+  { value: "web-development", label: "Web Development" },
 ];
 
 const CreatePost = () => {
   const [coverImage, setCoverImage] = useState<string>();
   const [content, setContent] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const handleImageChange = (file: File) => {
     const imageUrl = URL.createObjectURL(file);
     setCoverImage(imageUrl);
+  };
+
+  const handleTagChange = (value: string) => {
+    if (!selectedTags.includes(value)) {
+      setSelectedTags([...selectedTags, value]);
+    }
+  };
+
+  const removeTag = (tagToRemove: string) => {
+    setSelectedTags(selectedTags.filter((tag) => tag !== tagToRemove));
   };
 
   // Quill modules configuration
@@ -97,73 +114,41 @@ const CreatePost = () => {
           </p>
         </div>
 
-        {/* Custom Select */}
+        {/* Tags */}
         <div>
-          <label className="block text-dark-200 font-medium mb-2">
-            Category
-          </label>
-          <div className="relative">
-            <button
-              type="button"
-              className="relative w-full px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 
-              text-left text-dark-100 focus:outline-none focus:ring-2 focus:ring-primary-500 
-              focus:border-transparent hover:bg-dark-600/50 transition-colors"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <span className={!selectedCategory ? "text-dark-400" : ""}>
-                {selectedCategory
-                  ? CATEGORIES.find((cat) => cat.value === selectedCategory)
-                      ?.label
-                  : "Select a category"}
-              </span>
-              <span className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-                <svg
-                  className={`h-4 w-4 transition-transform duration-200 ${
-                    isOpen ? "transform rotate-180" : ""
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </span>
-            </button>
-
-            {isOpen && (
-              <>
-                <div
-                  className="fixed inset-0 z-10"
-                  onClick={() => setIsOpen(false)}
-                />
-                <ul
-                  className="absolute z-20 w-full mt-1 bg-dark-700 border border-dark-600 
-                  rounded-lg shadow-lg max-h-60 overflow-auto"
-                >
-                  {CATEGORIES.map((category) => (
-                    <li
-                      key={category.value}
-                      className={`px-4 py-2 cursor-pointer hover:bg-dark-600 
-                      ${
-                        selectedCategory === category.value
-                          ? "text-primary-400"
-                          : "text-dark-100"
-                      }`}
-                      onClick={() => {
-                        setSelectedCategory(category.value);
-                        setIsOpen(false);
-                      }}
+          <label className="block text-dark-200 font-medium mb-2">Tags</label>
+          <div className="space-y-3">
+            <Select
+              options={TAGS_OPTIONS}
+              value=""
+              onChange={handleTagChange}
+              placeholder="Select tags"
+              className="w-full"
+            />
+            {selectedTags.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {selectedTags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 bg-primary-500/10 text-primary-400 rounded-full text-sm 
+                    flex items-center space-x-1"
+                  >
+                    <span>
+                      {
+                        TAGS_OPTIONS.find((option) => option.value === tag)
+                          ?.label
+                      }
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => removeTag(tag)}
+                      className="hover:text-red-400 ml-2"
                     >
-                      {category.label}
-                    </li>
-                  ))}
-                </ul>
-              </>
+                      ×
+                    </button>
+                  </span>
+                ))}
+              </div>
             )}
           </div>
         </div>

@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
+// Components
 import { Button, PostCard } from "../components";
+// Data
 import { posts } from "../data/postsData";
 
 const Home = () => {
@@ -19,10 +21,10 @@ const Home = () => {
           up-to-date with the latest in web development.
         </p>
         <div className="flex items-center space-x-4">
-          <Button variant="primary" size="lg">
+          <Button variant="primary" size="md">
             Start Reading
           </Button>
-          <Button variant="outline" size="lg">
+          <Button variant="outline" size="md">
             Create Account
           </Button>
         </div>
