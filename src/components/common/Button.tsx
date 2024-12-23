@@ -19,13 +19,13 @@ const Button = ({
   className = "",
   ...props
 }: ButtonProps) => {
-  const baseStyles = "rounded-md font-medium transition-colors duration-200";
+  const baseStyles =
+    "rounded-md font-medium transition-colors duration-200 flex items-center";
 
   const variants = {
     primary: "bg-code-blue hover:bg-code-blue-light text-code-text-light",
     secondary: "bg-code-purple hover:opacity-90 text-code-text-light",
-    outline:
-      "border-2 border-code-blue text-code-blue hover:bg-code-blue hover:text-code-text-light",
+    outline: "border border-code-blue text-code-light blue hover:bg-code-blue",
   };
 
   const sizes = {

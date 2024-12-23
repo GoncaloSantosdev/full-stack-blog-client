@@ -18,21 +18,19 @@ const App = () => {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<Navigate to="/home" replace />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/posts" element={<Posts />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/creators-ranking" element={<CreatorsRanking />} />
-            <Route path="/register" element={<Register />} />
-            {/* Private Routes */}
-            <Route path="/create-post" element={<CreatePost />} />
-            <Route path="/profile" element={<Profile />} />
-            {/* Admin Routes */}
-          </Routes>
-        </div>
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/creators-ranking" element={<CreatorsRanking />} />
+          <Route path="/register" element={<Register />} />
+          {/* Private Routes */}
+          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/profile" element={<Profile />} />
+          {/* Admin Routes */}
+        </Routes>
       </main>
       <Footer />
     </div>
